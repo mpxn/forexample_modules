@@ -1,0 +1,7 @@
+query getLaunches($limit: Int!, $offset: Int, $find: LaunchFind!) {
+  launches(limit: $limit, offset: $offset, find: $find) {
+    mission_name
+    details
+    id
+  }
+}

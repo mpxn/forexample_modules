@@ -1,0 +1,87 @@
+name: flutter-modules
+
+ide:
+  intellij: false
+  vscode: true
+
+versioning:
+  mode: independent
+
+packages:
+  - packages/**
+  - services/**
+
+scripts:
+  analyze:
+    run: melos exec -c 1 -- "dart analyze . --fatal-infos"
+
+  analyze:tuneup:check:
+    run: melos exec -- tuneup check
+
+  analyze:tuneup:stats:
+    run: melos exec -c 1 -- tuneup stats
+
+  analyze:tuneup:clean:
+    run: melos exec -- tuneup clean
+
+  analyze:tuneup:trim:
+    run: melos exec -- tuneup trim
+
+  buildrunner:build:
+    run: melos exec -c 1 -- "flutter pub run build_runner build --delete-conflicting-outputs"
+    select-package:
+
+  buildrunner:clean:
+    run: melos exec -c 1 -- "flutter pub run build_runner clean"
+    select-package:
+
+  format:
+    run: flutter format .
+
+  flutter:info:
+    run: dart scripts/flutter_info/get_flutter_info.dart > packages/components/lib/constants/flutter_info.dart
+
+  lint:all:
+    run: melos run analyze:tuneup:check && melos run analyze:tuneup:clean && melos run analyze:tuneup:trim && melos run format
+
+  lint:
+    run: melos run analyze:tuneup:check && melos run analyze:tuneup:clean && melos run analyze:tuneup:trim && melos run format
+    select-package:
+
+  pub:get:all:
+    run: melos exec -c 1 -- "flutter pub get"
+
+  pub:upgrade:all:
+    run: melos exec -c 1 -- "flutter pub upgrade"
+
+  pub:get:
+    run: melos exec -c 1 -- "flutter pub get"
+    select-package:
+
+  qualitycheck:
+    run: melos run lint:all && melos run test:all
+
+  test:all:
+    run: melos exec -c 1 --fail-fast --dir-exists=test --ignore="*example*" --ignore="*web*" -- flutter test
+
+  test:
+    run: melos exec -c 1 --fail-fast --dir-exists=test --ignore="*example*" --ignore="*web*" -- flutter test
+    select-package:
+      dir-exists:
+        - test
+
+  test:coverage:
+    run: melos exec -c 1 --fail-fast --dir-exists=test --ignore="*example*" --ignore="*web*" -- flutter test --coverage && genhtml -o coverage $MELOS_PACKAGE_NAME/coverage/lcov.info && open $MELOS_PACKAGE_NAME/coverage/index.html
+    select-package:
+      dir-exists:
+        - test
+
+  test:updategoldens:
+    run: melos exec -c 1 --fail-fast --dir-exists=test --ignore="*example*" --ignore="*web*" -- flutter test --update-goldens
+    select-package:
+      dir-exists:
+        - test
+
+environment:
+  sdk: ">=2.7.0 <3.0.0"
+  flutter: ">=1.22.6 <2.0.0"

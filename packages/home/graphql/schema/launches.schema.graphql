@@ -1,0 +1,11 @@
+type Launch {
+  mission_name: String
+  details: String
+  id: String
+}
+input LaunchFind {
+  mission_name: String!
+}
+type Query {
+  launches(limit: Int!, offset: Int, find: LaunchFind!): [Launch]!
+}
