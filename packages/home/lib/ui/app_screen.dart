@@ -5,9 +5,6 @@ import 'package:forexample/d_system/components/icons/ex_app.dart';
 import 'package:home/ui/launches_location.dart';
 import 'package:home/ui/profile_location.dart';
 
-
-
-
 class AppScreen extends StatefulWidget {
   const AppScreen({Key? key}) : super(key: key);
   @override
@@ -48,6 +45,7 @@ class _AppScreenState extends State<AppScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: IndexedStack(
         index: currentIndex,
         children: [

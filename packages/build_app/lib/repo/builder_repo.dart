@@ -1,8 +1,15 @@
 
 
 
+import 'package:shared_preferences/shared_preferences.dart';
+
 class BuilderRepo {
- bool checkAuth() {
-  return true;
+ Future<bool> checkAuth() async {
+  final prefs = await SharedPreferences.getInstance();
+  try {
+   return prefs.getBool('needAuth') ?? true;
+  } catch (_) {
+   return true;
+  }
 }
 }
