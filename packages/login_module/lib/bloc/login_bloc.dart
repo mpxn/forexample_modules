@@ -31,7 +31,6 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       if (needCreatePin) {
         emitter( const LoginState.notAuthenticatedCreatePin(confirm: false, pin: ''));
       } else {
-        final pin = await _loginRepo.fetchPin();
         emitter(const LoginState.notAuthenticated( error: false));
       }
     } catch (e) {
@@ -43,9 +42,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   Future<void> _addNewPin(
       LoginEventAddNewPin event, Emitter<LoginState> emitter) async {
     try {
-      print('event ^^^^^^^^^^^^^^^^^^^^^^^ $event');
       emitter(LoginState.notAuthenticatedCreatePin(confirm: true, pin: event.pin));
-
     } catch (e) {
       emitter(LoginState.error(e.toString()));
       rethrow;
@@ -59,7 +56,6 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       checkPin
           ? emitter(const LoginState.authenticated())
           : emitter(const LoginState.notAuthenticated( error: true));
-      // emitter(const LoginState.authenticated());
     } catch (e) {
       emitter(LoginState.error(e.toString()));
       rethrow;
@@ -71,8 +67,6 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     try {
       await _loginRepo.addNewPin(event.pin);
       emitter(const LoginState.notAuthenticated( error: false));
-
-      print('_confirmNewPin(_confirmNewPin(_confirmNewPin(_confirmNewPin(_confirmNewPin(');
     } catch (e) {
       emitter(LoginState.error(e.toString()));
       rethrow;
