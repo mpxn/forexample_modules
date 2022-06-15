@@ -1,5 +1,5 @@
+import 'package:build_app/repo/builder_repo.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../repo/builder_repo.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'builder_app_event.dart';

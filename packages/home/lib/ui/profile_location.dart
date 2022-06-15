@@ -1,8 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:beamer/beamer.dart';
-import 'package:home/ui/profile_screen.dart';
-
+import 'package:profile_module/profile.dart';
 
 class ProfileLocation extends BeamLocation<BeamState> {
   ProfileLocation(RouteInformation routeInformation) : super(routeInformation);
@@ -12,11 +11,11 @@ class ProfileLocation extends BeamLocation<BeamState> {
 
   @override
   List<BeamPage> buildPages(BuildContext context, BeamState state) => [
-    BeamPage(
-      key: const ValueKey('profile'),
-      title: 'profile'.tr(),
-      type: BeamPageType.noTransition,
-      child: const ProfileScreen(),
-    ),
-  ];
+        BeamPage(
+          key: const ValueKey('profile'),
+          title: 'profile'.tr(),
+          type: BeamPageType.noTransition,
+          child: const Profile(),
+        ),
+      ];
 }

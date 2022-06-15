@@ -35,177 +35,160 @@ class _LaunchesScreenState extends State<LaunchesScreen> {
   Widget build(BuildContext context) {
     return BlocBuilder<HomeBloc, HomeState>(
       builder: (context, state) {
-        return
-            // Scaffold(
-            // // appBar: AppBar(
-            // //   title: GestureDetector(
-            // //     onTap: () => FocusScope.of(context).unfocus(),
-            // //     child: Text(
-            // //       'launches'.tr(),
-            // //     ),
-            // //   ),
-            // // ),
-            // body:
-            Column(
-              // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    'launches'.tr(),
-                  ),
-                ),
-
-                TextField(
-                  onSubmitted: (str) {
+        return Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: const Text(
+                'launches',
+              ).tr(),
+            ),
+            TextField(
+              onSubmitted: (str) {
+                if (nameTextController.text.length >= 3) {
+                  setState(() {
+                    context.read<HomeBloc>().add(
+                        HomeEvent.addSearch(nameTextController.text, false));
+                    hintText = nameTextController.text;
+                    labelText = nameTextController.text;
+                    nameTextController.clear();
+                    FocusScope.of(context).unfocus();
+                  });
+                }
+              },
+              focusNode: myFocusNode,
+              onChanged: (_) {
+                setState(() {});
+              },
+              autofocus: true,
+              textAlign: TextAlign.center,
+              controller: nameTextController,
+              decoration: InputDecoration(
+                counterText: nameTextController.text.length < 3 &&
+                            nameTextController.text.isNotEmpty ||
+                        state is HomeStateLoaded &&
+                            nameTextController.text.length < 3
+                    ? 'launches_press_one_more'.tr()
+                    : '',
+                labelText: labelText,
+                hintText: hintText,
+                helperText: nameTextController.text.length < 3
+                    ? 'launches_at_least'.tr()
+                    : '',
+                helperStyle:
+                    const TextStyle(fontSize: 14, fontStyle: FontStyle.italic),
+                border: const OutlineInputBorder(),
+                suffixIcon: IconButton(
+                  icon: nameTextController.text.length < 3
+                      ? const Icon(Icons.search_off)
+                      : const Icon(Icons.search_rounded),
+                  onPressed: () {
                     if (nameTextController.text.length >= 3) {
                       setState(() {
-                        context.read<HomeBloc>().add(
-                            HomeEvent.addSearch(nameTextController.text, false));
+                        context.read<HomeBloc>().add(HomeEvent.addSearch(
+                            nameTextController.text, false));
                         hintText = nameTextController.text;
                         labelText = nameTextController.text;
                         nameTextController.clear();
                         FocusScope.of(context).unfocus();
                       });
+                    } else {
+                      hintText = '';
+                      labelText = 'launches_label'.tr();
+                      nameTextController.clear();
+                      myFocusNode.requestFocus();
+                      context.read<HomeBloc>().add(const HomeEvent.init());
                     }
                   },
-                  focusNode: myFocusNode,
-                  onChanged: (_) {
-                    setState(() {});
-                  },
-                  autofocus: true,
-                  textAlign: TextAlign.center,
-                  controller: nameTextController,
-                  decoration: InputDecoration(
-                    counterText: nameTextController.text.length < 3 &&
-                                nameTextController.text.isNotEmpty ||
-                            state is HomeStateLoaded &&
-                                nameTextController.text.length < 3
-                        ? 'Press one more to reset'
-                        : '',
-                    labelText: labelText,
-                    hintText: hintText,
-                    helperText: nameTextController.text.length < 3
-                        ? 'Enter at least 3 characters'
-                        : '',
-                    helperStyle: const TextStyle(
-                        fontSize: 14, fontStyle: FontStyle.italic),
-                    border: const OutlineInputBorder(),
-                    suffixIcon: IconButton(
-                      icon: nameTextController.text.length < 3
-                          ? const Icon(Icons.search_off)
-                          : const Icon(Icons.search_rounded),
-                      onPressed: () {
-                        if (nameTextController.text.length >= 3) {
-                          setState(() {
-                            context.read<HomeBloc>().add(HomeEvent.addSearch(
-                                nameTextController.text, false));
-                            hintText = nameTextController.text;
-                            labelText = nameTextController.text;
-                            nameTextController.clear();
-                            FocusScope.of(context).unfocus();
-                          });
-                        } else {
-                          hintText = '';
-                          labelText = 'Enter mission name';
-                          nameTextController.clear();
-                          myFocusNode.requestFocus();
-                          context.read<HomeBloc>().add(const HomeEvent.init());
-                        }
+                ),
+              ),
+            ),
+            state.when(
+              loaded: (launch, _) {
+                return Expanded(
+                  child: NotificationListener<ScrollNotification>(
+                    onNotification: (ScrollNotification scrollInfo) {
+                      if (scrollInfo.metrics.pixels ==
+                              scrollInfo.metrics.maxScrollExtent &&
+                          scrollInfo.metrics.maxScrollExtent !=
+                              scrollInfo.metrics.minScrollExtent) {
+                        context.read<HomeBloc>().add(
+                            HomeEvent.addSearch(nameTextController.text, true));
+                      }
+                      return true;
+                    },
+                    child: ListView.builder(
+                      itemCount: launch.length,
+                      itemBuilder: (ctx, index) {
+                        return GestureDetector(
+                          onTap: () {
+                            context.beamToNamed(
+                              '/launches/${launch[index]!.id}',
+                            );
+                          },
+                          child: Card(
+                            elevation: 20,
+                            child: Column(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      vertical: 5.0, horizontal: 10),
+                                  child: Column(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                          '${index + 1}. ${'launches_mission'.tr()}: ${launch[index]!.id}',
+                                          style: const TextStyle(
+                                              fontSize: 16,
+                                              fontStyle: FontStyle.italic)),
+                                      Text('${launch[index]!.missionName}',
+                                          style: const TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w500)),
+                                    ],
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      vertical: 5.0, horizontal: 10),
+                                  child: Text(
+                                    launch[index]!.details ??
+                                        'launches_no_details'.tr(),
+                                    maxLines: 3,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
                       },
                     ),
                   ),
-                ),
-
-                state.when(
-                  loaded: (launch, _) {
-                    return Expanded(
-                      child: NotificationListener<ScrollNotification>(
-                        onNotification: (ScrollNotification scrollInfo) {
-                          if (scrollInfo.metrics.pixels ==
-                                  scrollInfo.metrics.maxScrollExtent &&
-                              scrollInfo.metrics.maxScrollExtent !=
-                                  scrollInfo.metrics.minScrollExtent) {
-                            context.read<HomeBloc>().add(HomeEvent.addSearch(
-                                nameTextController.text, true));
-                          }
-                          return true;
-                        },
-                        child: ListView.builder(
-                          itemCount: launch.length,
-                          itemBuilder: (ctx, index) {
-                            return GestureDetector(
-                              onTap: () {
-                                context.beamToNamed(
-                                  '/launches/${launch[index]!.id}',
-                                );
-                              },
-                              child: Card(
-                                elevation: 20,
-                                child: Column(
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 5.0, horizontal: 10),
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text(
-                                              '${index + 1}. Mission: ${launch[index]!.id}',
-                                              style: const TextStyle(
-                                                  fontSize: 16,
-                                                  fontStyle: FontStyle.italic)),
-                                          Text('${launch[index]!.missionName}',
-                                              style: const TextStyle(
-                                                  fontSize: 16,
-                                                  fontWeight: FontWeight.w500)),
-                                        ],
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 5.0, horizontal: 10),
-                                      child: Text(
-                                        launch[index]!.details ??
-                                            'no_details'.tr(),
-                                        maxLines: 3,
-                                        overflow: TextOverflow.ellipsis,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            );
-                          },
-                        ),
-                      ),
-                    );
-                  },
-                  error: (e) => Center(
-                    child: Text('error'.tr()),
-                  ),
-                  init: () => Center(
-                    child: Text('find_launches'.tr()),
-                  ),
-                  loading: () =>
-                      const CircularProgressIndicator(strokeWidth: 1.5),
-                  noLaunches: () => Center(
-                    child: Text('no_launches'.tr()),
-                  ),
-                ),
-                state.maybeWhen(
-                    loaded: (_, status) {
-                      if (status) {
-                        return const LinearProgressIndicator();
-                      }
-                      return const Center();
-                    },
-                    orElse: () => const Center()),
-              ],
-            );
-
-        // );
+                );
+              },
+              error: (e) => Center(
+                child: const Text('error').tr(),
+              ),
+              init: () => Center(
+                child: const Text('launches_find_launches').tr(),
+              ),
+              loading: () => const CircularProgressIndicator(strokeWidth: 1.5),
+              noLaunches: () => Center(
+                child: const Text('launches_no_launches').tr(),
+              ),
+            ),
+            state.maybeWhen(
+                loaded: (_, status) {
+                  if (status) {
+                    return const LinearProgressIndicator();
+                  }
+                  return const Center();
+                },
+                orElse: () => const Center()),
+          ],
+        );
       },
     );
   }

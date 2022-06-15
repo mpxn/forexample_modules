@@ -1,7 +1,6 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfileRepo {
-
   Future<bool> checkAuthStatus() async {
     final prefs = await SharedPreferences.getInstance();
     try {
@@ -19,6 +18,4 @@ class ProfileRepo {
       throw UnsupportedError(e.toString());
     }
   }
-
 }
-

@@ -94,8 +94,8 @@ class __$$BuildAppEventInitCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$BuildAppEventInit implements BuildAppEventInit {
-  const _$BuildAppEventInit();
+class _$BuildAppEventInit extends BuildAppEventInit {
+  const _$BuildAppEventInit() : super._();
 
   @override
   String toString() {
@@ -174,8 +174,9 @@ class _$BuildAppEventInit implements BuildAppEventInit {
   }
 }
 
-abstract class BuildAppEventInit implements BuildAppEvent {
+abstract class BuildAppEventInit extends BuildAppEvent {
   const factory BuildAppEventInit() = _$BuildAppEventInit;
+  const BuildAppEventInit._() : super._();
 }
 
 /// @nodoc
@@ -200,8 +201,8 @@ class __$$BuildAppEventCheckAuthCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$BuildAppEventCheckAuth implements BuildAppEventCheckAuth {
-  const _$BuildAppEventCheckAuth();
+class _$BuildAppEventCheckAuth extends BuildAppEventCheckAuth {
+  const _$BuildAppEventCheckAuth() : super._();
 
   @override
   String toString() {
@@ -280,8 +281,9 @@ class _$BuildAppEventCheckAuth implements BuildAppEventCheckAuth {
   }
 }
 
-abstract class BuildAppEventCheckAuth implements BuildAppEvent {
+abstract class BuildAppEventCheckAuth extends BuildAppEvent {
   const factory BuildAppEventCheckAuth() = _$BuildAppEventCheckAuth;
+  const BuildAppEventCheckAuth._() : super._();
 }
 
 /// @nodoc
@@ -377,8 +379,8 @@ class __$$BuildAppStateLoadingCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$BuildAppStateLoading implements BuildAppStateLoading {
-  const _$BuildAppStateLoading();
+class _$BuildAppStateLoading extends BuildAppStateLoading {
+  const _$BuildAppStateLoading() : super._();
 
   @override
   String toString() {
@@ -470,8 +472,9 @@ class _$BuildAppStateLoading implements BuildAppStateLoading {
   }
 }
 
-abstract class BuildAppStateLoading implements BuildAppState {
+abstract class BuildAppStateLoading extends BuildAppState {
   const factory BuildAppStateLoading() = _$BuildAppStateLoading;
+  const BuildAppStateLoading._() : super._();
 }
 
 /// @nodoc
@@ -498,8 +501,8 @@ class __$$BuildAppStateAuthenticatedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$BuildAppStateAuthenticated implements BuildAppStateAuthenticated {
-  const _$BuildAppStateAuthenticated();
+class _$BuildAppStateAuthenticated extends BuildAppStateAuthenticated {
+  const _$BuildAppStateAuthenticated() : super._();
 
   @override
   String toString() {
@@ -592,8 +595,9 @@ class _$BuildAppStateAuthenticated implements BuildAppStateAuthenticated {
   }
 }
 
-abstract class BuildAppStateAuthenticated implements BuildAppState {
+abstract class BuildAppStateAuthenticated extends BuildAppState {
   const factory BuildAppStateAuthenticated() = _$BuildAppStateAuthenticated;
+  const BuildAppStateAuthenticated._() : super._();
 }
 
 /// @nodoc
@@ -620,8 +624,8 @@ class __$$BuildAppStateNotAuthenticatedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$BuildAppStateNotAuthenticated implements BuildAppStateNotAuthenticated {
-  const _$BuildAppStateNotAuthenticated();
+class _$BuildAppStateNotAuthenticated extends BuildAppStateNotAuthenticated {
+  const _$BuildAppStateNotAuthenticated() : super._();
 
   @override
   String toString() {
@@ -714,9 +718,10 @@ class _$BuildAppStateNotAuthenticated implements BuildAppStateNotAuthenticated {
   }
 }
 
-abstract class BuildAppStateNotAuthenticated implements BuildAppState {
+abstract class BuildAppStateNotAuthenticated extends BuildAppState {
   const factory BuildAppStateNotAuthenticated() =
       _$BuildAppStateNotAuthenticated;
+  const BuildAppStateNotAuthenticated._() : super._();
 }
 
 /// @nodoc
@@ -753,8 +758,8 @@ class __$$BuildAppStateErrorCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$BuildAppStateError implements BuildAppStateError {
-  const _$BuildAppStateError(this.error);
+class _$BuildAppStateError extends BuildAppStateError {
+  const _$BuildAppStateError(this.error) : super._();
 
   @override
   final String error;
@@ -858,8 +863,9 @@ class _$BuildAppStateError implements BuildAppStateError {
   }
 }
 
-abstract class BuildAppStateError implements BuildAppState {
+abstract class BuildAppStateError extends BuildAppState {
   const factory BuildAppStateError(final String error) = _$BuildAppStateError;
+  const BuildAppStateError._() : super._();
 
   String get error => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)

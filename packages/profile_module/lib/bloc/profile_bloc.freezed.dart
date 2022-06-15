@@ -93,8 +93,8 @@ class __$$ProfileEventInitCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$ProfileEventInit implements ProfileEventInit {
-  const _$ProfileEventInit();
+class _$ProfileEventInit extends ProfileEventInit {
+  const _$ProfileEventInit() : super._();
 
   @override
   String toString() {
@@ -173,8 +173,9 @@ class _$ProfileEventInit implements ProfileEventInit {
   }
 }
 
-abstract class ProfileEventInit implements ProfileEvent {
+abstract class ProfileEventInit extends ProfileEvent {
   const factory ProfileEventInit() = _$ProfileEventInit;
+  const ProfileEventInit._() : super._();
 }
 
 /// @nodoc
@@ -212,8 +213,8 @@ class __$$ProfileEventChangeAuthCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$ProfileEventChangeAuth implements ProfileEventChangeAuth {
-  const _$ProfileEventChangeAuth({required this.enableAuth});
+class _$ProfileEventChangeAuth extends ProfileEventChangeAuth {
+  const _$ProfileEventChangeAuth({required this.enableAuth}) : super._();
 
   @override
   final bool enableAuth;
@@ -305,9 +306,10 @@ class _$ProfileEventChangeAuth implements ProfileEventChangeAuth {
   }
 }
 
-abstract class ProfileEventChangeAuth implements ProfileEvent {
+abstract class ProfileEventChangeAuth extends ProfileEvent {
   const factory ProfileEventChangeAuth({required final bool enableAuth}) =
       _$ProfileEventChangeAuth;
+  const ProfileEventChangeAuth._() : super._();
 
   bool get enableAuth => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -400,8 +402,8 @@ class __$$ProfileStateLoadingCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$ProfileStateLoading implements ProfileStateLoading {
-  const _$ProfileStateLoading();
+class _$ProfileStateLoading extends ProfileStateLoading {
+  const _$ProfileStateLoading() : super._();
 
   @override
   String toString() {
@@ -486,8 +488,9 @@ class _$ProfileStateLoading implements ProfileStateLoading {
   }
 }
 
-abstract class ProfileStateLoading implements ProfileState {
+abstract class ProfileStateLoading extends ProfileState {
   const factory ProfileStateLoading() = _$ProfileStateLoading;
+  const ProfileStateLoading._() : super._();
 }
 
 /// @nodoc
@@ -524,8 +527,8 @@ class __$$ProfileStateAuthCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$ProfileStateAuth implements ProfileStateAuth {
-  const _$ProfileStateAuth({required this.enabledAuth});
+class _$ProfileStateAuth extends ProfileStateAuth {
+  const _$ProfileStateAuth({required this.enabledAuth}) : super._();
 
   @override
   final bool enabledAuth;
@@ -622,9 +625,10 @@ class _$ProfileStateAuth implements ProfileStateAuth {
   }
 }
 
-abstract class ProfileStateAuth implements ProfileState {
+abstract class ProfileStateAuth extends ProfileState {
   const factory ProfileStateAuth({required final bool enabledAuth}) =
       _$ProfileStateAuth;
+  const ProfileStateAuth._() : super._();
 
   bool get enabledAuth => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -666,8 +670,8 @@ class __$$ProfileStateErrorCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$ProfileStateError implements ProfileStateError {
-  const _$ProfileStateError(this.error);
+class _$ProfileStateError extends ProfileStateError {
+  const _$ProfileStateError(this.error) : super._();
 
   @override
   final String error;
@@ -763,8 +767,9 @@ class _$ProfileStateError implements ProfileStateError {
   }
 }
 
-abstract class ProfileStateError implements ProfileState {
+abstract class ProfileStateError extends ProfileState {
   const factory ProfileStateError(final String error) = _$ProfileStateError;
+  const ProfileStateError._() : super._();
 
   String get error => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
