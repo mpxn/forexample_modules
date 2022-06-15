@@ -43,63 +43,66 @@ class _LaunchesScreenState extends State<LaunchesScreen> {
                 'launches',
               ).tr(),
             ),
-            TextField(
-              onSubmitted: (str) {
-                if (nameTextController.text.length >= 3) {
-                  setState(() {
-                    context.read<HomeBloc>().add(
-                        HomeEvent.addSearch(nameTextController.text, false));
-                    hintText = nameTextController.text;
-                    labelText = nameTextController.text;
-                    nameTextController.clear();
-                    FocusScope.of(context).unfocus();
-                  });
-                }
-              },
-              focusNode: myFocusNode,
-              onChanged: (_) {
-                setState(() {});
-              },
-              autofocus: true,
-              textAlign: TextAlign.center,
-              controller: nameTextController,
-              decoration: InputDecoration(
-                counterText: nameTextController.text.length < 3 &&
-                            nameTextController.text.isNotEmpty ||
-                        state is HomeStateLoaded &&
-                            nameTextController.text.length < 3
-                    ? 'launches_press_one_more'.tr()
-                    : '',
-                labelText: labelText,
-                hintText: hintText,
-                helperText: nameTextController.text.length < 3
-                    ? 'launches_at_least'.tr()
-                    : '',
-                helperStyle:
-                    const TextStyle(fontSize: 14, fontStyle: FontStyle.italic),
-                border: const OutlineInputBorder(),
-                suffixIcon: IconButton(
-                  icon: nameTextController.text.length < 3
-                      ? const Icon(Icons.search_off)
-                      : const Icon(Icons.search_rounded),
-                  onPressed: () {
-                    if (nameTextController.text.length >= 3) {
-                      setState(() {
-                        context.read<HomeBloc>().add(HomeEvent.addSearch(
-                            nameTextController.text, false));
-                        hintText = nameTextController.text;
-                        labelText = nameTextController.text;
-                        nameTextController.clear();
-                        FocusScope.of(context).unfocus();
-                      });
-                    } else {
-                      hintText = '';
-                      labelText = 'launches_label'.tr();
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: TextField(
+                onSubmitted: (str) {
+                  if (nameTextController.text.length >= 3) {
+                    setState(() {
+                      context.read<HomeBloc>().add(
+                          HomeEvent.addSearch(nameTextController.text, false));
+                      hintText = nameTextController.text;
+                      labelText = nameTextController.text;
                       nameTextController.clear();
-                      myFocusNode.requestFocus();
-                      context.read<HomeBloc>().add(const HomeEvent.init());
-                    }
-                  },
+                      FocusScope.of(context).unfocus();
+                    });
+                  }
+                },
+                focusNode: myFocusNode,
+                onChanged: (_) {
+                  setState(() {});
+                },
+                autofocus: true,
+                textAlign: TextAlign.center,
+                controller: nameTextController,
+                decoration: InputDecoration(
+                  counterText: nameTextController.text.length < 3 &&
+                              nameTextController.text.isNotEmpty ||
+                          state is HomeStateLoaded &&
+                              nameTextController.text.length < 3
+                      ? 'launches_press_one_more'.tr()
+                      : '',
+                  labelText: labelText,
+                  hintText: hintText,
+                  helperText: nameTextController.text.length < 3
+                      ? 'launches_at_least'.tr()
+                      : '',
+                  helperStyle:
+                      const TextStyle(fontSize: 14, fontStyle: FontStyle.italic),
+                  border: const OutlineInputBorder(),
+                  suffixIcon: IconButton(
+                    icon: nameTextController.text.length < 3
+                        ? const Icon(Icons.search_off)
+                        : const Icon(Icons.search_rounded),
+                    onPressed: () {
+                      if (nameTextController.text.length >= 3) {
+                        setState(() {
+                          context.read<HomeBloc>().add(HomeEvent.addSearch(
+                              nameTextController.text, false));
+                          hintText = nameTextController.text;
+                          labelText = nameTextController.text;
+                          nameTextController.clear();
+                          FocusScope.of(context).unfocus();
+                        });
+                      } else {
+                        hintText = '';
+                        labelText = 'launches_label'.tr();
+                        nameTextController.clear();
+                        myFocusNode.requestFocus();
+                        context.read<HomeBloc>().add(const HomeEvent.init());
+                      }
+                    },
+                  ),
                 ),
               ),
             ),
