@@ -12,7 +12,7 @@ dependencies:
   flutter:
     sdk: flutter
   forexample:
-    path: ../../../forexample
+    path: ../../../exapp
   login:
     path: ../login_module
   profile_module:

@@ -12,11 +12,11 @@ dependencies:
   flutter:
     sdk: flutter
   forexample:
-    path: ../../../forexample
+    path: ../../../exapp
   home:
     path: ../home
   widgets:
-    path: ../../widgets
+    path: ../widgets
 
   easy_localization: ^3.0.1
   flutter_bloc: ^8.0.1

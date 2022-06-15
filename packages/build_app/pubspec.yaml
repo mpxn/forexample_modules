@@ -16,9 +16,9 @@ dependencies:
   login:
     path: ../login_module
   widgets:
-    path: ../../widgets
+    path: ../widgets
   forexample:
-    path: ../../../forexample
+    path: ../../../exapp
 
   flutter_bloc: ^8.0.1
   freezed_annotation: ^2.0.3
