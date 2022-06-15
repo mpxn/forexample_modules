@@ -68,7 +68,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       LoginEventConfirmNewPin event, Emitter<LoginState> emitter) async {
     try {
       await _loginRepo.addNewPin(event.pin);
-      emitter(const LoginState.notAuthenticated(error: false));
+      emitter(const LoginState.authenticated());
     } catch (e) {
       emitter(LoginState.error(e.toString()));
       rethrow;
