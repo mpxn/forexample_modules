@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:profile_module/bloc/profile_bloc.dart';
 import 'package:profile_module/repo/profile_repo.dart';
+import 'package:profile_module/ui/profile_page.dart';
 import 'package:widgets/error_page.dart';
 import 'package:widgets/loading_page.dart';
 
@@ -25,24 +26,6 @@ class Profile extends StatelessWidget {
             auth: (bool enabledAuth) => ProfilePage(enabledAuth: enabledAuth),
           );
         },
-      ),
-    );
-  }
-}
-
-class ProfilePage extends StatelessWidget {
-  const ProfilePage({Key? key, required this.enabledAuth}) : super(key: key);
-  final bool enabledAuth;
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Switch(
-        onChanged: (bool value) {
-          context.read<ProfileBloc>().add(
-                ProfileEvent.changeAuth(enableAuth: value),
-              );
-        },
-        value: enabledAuth,
       ),
     );
   }

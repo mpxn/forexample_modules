@@ -39,7 +39,7 @@ class _AppScreenState extends State<AppScreen> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     final uriString = Beamer.of(context).configuration.location!;
-    currentIndex = uriString.contains('launches') ? 0 : 1;
+    currentIndex = uriString.contains('launches') ? 1 : 0;
   }
 
   @override

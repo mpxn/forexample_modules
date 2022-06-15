@@ -25,7 +25,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       (event, emit) async {
         try {
           await _profileRepo.changeAuth(event.enableAuth);
-          emit( ProfileState.auth(enabledAuth: event.enableAuth));
+          emit(ProfileState.auth(enabledAuth: event.enableAuth));
         } catch (e) {
           emit(ProfileState.error(e.toString()));
           rethrow;

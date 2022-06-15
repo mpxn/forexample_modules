@@ -1,6 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // @dart = 2.12
 
+// ignore_for_file: overridden_fields
+// ignore_for_file: prefer_const_literals_to_create_immutables
+// ignore_for_file: prefer_const_constructors
+// ignore_for_file: non_constant_identifier_names
+// ignore_for_file: prefer_const_declarations
+// ignore_for_file: depend_on_referenced_packages
+
 import 'package:artemis/artemis.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:equatable/equatable.dart';

@@ -24,7 +24,7 @@ class BuilderApp extends StatelessWidget {
               return state.when(
                 loading: () => const Loading(),
                 notAuthenticated: () => const PinPage(),
-                authenticated: () => Home(),
+                authenticated: () => const Home(),
                 error: (error) => ErrorPage(
                   error: error,
                 ),

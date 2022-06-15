@@ -1,7 +1,5 @@
-import 'dart:developer';
-
 import 'package:artemis/artemis.dart';
-import '../graphql/graphql_api.graphql.dart';
+import 'package:home/graphql/graphql_api.dart';
 
 class HomeRepo {
   final String endpoint = 'https://api.spacex.land/graphql/';
@@ -10,7 +8,7 @@ class HomeRepo {
 
   Future<List<GetLaunches$Query$Launch?>> getLaunches(
       {required String missionName, int limit = 10, bool more = false}) async {
-    // await Future.delayed(const Duration(seconds: 1));
+    await Future.delayed(const Duration(seconds: 1));
     more ? offset += 10 : offset = 0;
     final artemisClient = ArtemisClient(endpoint);
     GraphQLResponse graphQLResponse = await artemisClient.execute(
@@ -29,6 +27,4 @@ class HomeRepo {
     }
     return launch;
   }
-
-
 }
