@@ -4,7 +4,7 @@ class BuilderRepo {
   Future<bool> checkAuth() async {
     final prefs = await SharedPreferences.getInstance();
     try {
-      return prefs.getBool('needAuth') ?? true;
+      return prefs.getBool('needAuth') ?? false;
     } catch (_) {
       return true;
     }
